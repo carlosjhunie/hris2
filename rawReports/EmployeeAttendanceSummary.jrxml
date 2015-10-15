@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-09-14T12:47:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EmployeeAttendanceSummary" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" columnSpacing="8" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31cedd2e-2dca-4569-abd8-1434380e468a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sql Server data adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="dateFrom" class="java.lang.String"/>
+	<parameter name="dateTo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select d.departmentName +' - ' +  e.lastname + ', ' + e.firstname + '(' + e.empNo +')' as "Name", 
+	ss.timeIn as "Shift TI", ss.timeOut as "Shift TO",
+	ISNULL(ete.timeIn,'') as "Emp TI", ISNULL(ete.timeOut, '') as "Emp TO", ISNULL(ete.resolutionRemarks, '') as "Resolution Remarks"
+ from empTimeEntry ete,employee e,department d, empSchedule es,shiftingSchedule ss
+ where ete.empId = e.empId
+ and e.departmentId = d.departmentId
+ and ete.empId = es.empId
+ and es.shiftingScheduleId =ss.shiftingScheduleId
+ and ete.timeIn >= $P{dateFrom}   and ete.timeIn <=  $P{dateTo}
+ order by d.departmentName, e.lastname]]>
+	</queryString>
+	<field name="Name" class="java.lang.String"/>
+	<field name="Shift TI" class="java.sql.Time"/>
+	<field name="Shift TO" class="java.sql.Time"/>
+	<field name="Emp TI" class="java.sql.Timestamp"/>
+	<field name="Emp TO" class="java.sql.Timestamp"/>
+	<field name="Resolution Remarks" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="250" height="20" uuid="e3c23d23-a12c-4edd-b44c-a86e419a4f42"/>
+				<textFieldExpression><![CDATA["EMPLOYEE ATTENDANCE SUMMARY"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="310" height="20" uuid="f868bb78-46a4-46e1-8b4d-227e791ca77d"/>
+				<textFieldExpression><![CDATA["From:              " + $P{dateFrom} + "  to  " + $P{dateTo} +""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="30" uuid="4f5250f7-15a3-474b-98ca-394610118b46"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="700" y="0" width="100" height="30" uuid="41296754-de56-41a0-ab39-fa91c12c9d72"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="800" height="20" uuid="ab3976db-ef15-4e28-8030-4023a93c25d3"/>
+				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="214" height="20" uuid="7623e1bb-725c-447a-8c74-3277e6ca4721"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="0" width="110" height="20" uuid="7a0069ca-ba77-46b2-8084-074acebef036"/>
+				<text><![CDATA[SHIFT T.I.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="0" width="110" height="20" uuid="82645411-7059-456f-a1f8-2ea27e93559b"/>
+				<text><![CDATA[SHIFT T.O.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="0" width="110" height="20" uuid="8ad10218-788a-420c-b278-427c6e1b3820"/>
+				<text><![CDATA[EMPLOYEE T.I.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="545" y="0" width="115" height="20" uuid="a3639a7a-8ad3-4836-8991-d13f16b5f820"/>
+				<text><![CDATA[EMPLOYEE T.O.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="0" width="141" height="20" uuid="b7152d1d-33c7-4f84-907d-57e9ff86f515"/>
+				<text><![CDATA[RESOLUTION]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="800" height="20" uuid="29e788ad-9015-42c1-927b-0e1c37946da5"/>
+				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="215" height="25" uuid="5f9e6098-f10a-41e5-a8bb-a17a263e9192"/>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="1" width="110" height="25" uuid="1c80bd92-6f3c-4b73-b4a6-817b34f4df9e"/>
+				<textFieldExpression><![CDATA[$F{Shift TI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="1" width="110" height="25" uuid="c93143a2-06a6-4101-840b-1aeb13f06acc"/>
+				<textFieldExpression><![CDATA[$F{Shift TO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="0" width="110" height="25" uuid="2f7be4d6-8ba3-4303-ac6b-da28f08f6af4"/>
+				<textFieldExpression><![CDATA[$F{Emp TI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="545" y="0" width="115" height="25" uuid="21c971b6-b679-46d3-8891-1a642091806a"/>
+				<textFieldExpression><![CDATA[$F{Emp TO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="0" width="141" height="26" uuid="716a3ecf-dee2-45bf-a019-66d6348cd25e"/>
+				<textFieldExpression><![CDATA[$F{Resolution Remarks}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="70">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="200" height="22" uuid="e0ae66bf-ded5-4aac-8dbd-a55303ddaf1c"/>
+				<textFieldExpression><![CDATA["Generated on " + new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="18" uuid="7dcabc04-a9c1-429f-9d1c-c050c59b0463"/>
+				<text><![CDATA[PREPARED BY:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="38" width="160" height="30" uuid="e4bec2b4-cde6-41f8-8dfb-2ed8223f6f43"/>
+				<textFieldExpression><![CDATA["________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="40" width="160" height="30" uuid="89bb7a1c-b44e-4659-bc84-9dbba09d88d5"/>
+				<textFieldExpression><![CDATA["________________________"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="20" width="100" height="18" uuid="05768a1d-17ee-429b-aa72-f8ad69e34d0f"/>
+				<text><![CDATA[APPROVED BY:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

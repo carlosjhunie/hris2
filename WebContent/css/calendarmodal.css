@@ -1,0 +1,115 @@
+body {
+	margin: 40px 10px;
+	padding: 0;
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	font-size: 14px;
+}
+
+.checkbox1{
+	margin: 5px 10px 0px 20px;
+}
+
+.checkbox1:first-child{
+	margin: 20px 10px 0px 20px;
+}
+
+#calendar {
+		width: 80%;
+		margin: 0 auto;
+		float: left;
+}
+
+#sidebar {
+	width: 370px;
+	height: 200px;
+	border: 1px solid #B0C4DE;
+	overflow: hidden;
+	margin: auto 0px;
+}
+
+#sidebar #scroller {
+	width: 385px;
+	height: 200px;
+	padding-bottom: 15px;
+	overflow: scroll;
+}
+
+a {
+	color: violet;
+	text-decoration: none
+}
+
+a:hover {
+	color: red;
+	text-decoration: underline;
+}
+
+#mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 9000;
+	background-color: #000;
+	display: none;
+}
+
+#boxes .window {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 440px;
+	height: 200px;
+	display: none;
+	z-index: 9999;
+	padding: 20px;
+}
+
+#boxes #dialog {
+	width: 375px;
+	height: 203px;
+	padding: 10px;
+	background-color: #ffffff;
+}
+
+#boxes #dialog1 {
+	width: 375px;
+	height: 203px;
+}
+
+#dialog1 .d-header {
+	background: url(images/login-header.png) no-repeat 0 0 transparent;
+	width: 375px;
+	height: 150px;
+}
+
+#dialog1 .d-header input {
+	position: relative;
+	top: 60px;
+	left: 100px;
+	border: 3px solid #cccccc;
+	height: 22px;
+	width: 200px;
+	font-size: 15px;
+	padding: 5px;
+	margin-top: 4px;
+}
+
+#dialog1 .d-blank {
+	float: left;
+	background: url(images/login-blank.png) no-repeat 0 0 transparent;
+	width: 267px;
+	height: 53px;
+}
+
+#dialog1 .d-login {
+	float: left;
+	width: 108px;
+	height: 53px;
+}
+
+#boxes #dialog2 {
+	background: url(images/notice.png) no-repeat 0 0 transparent;
+	width: 326px;
+	height: 229px;
+	padding: 50px 0 20px 25px;
+}

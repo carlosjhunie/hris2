@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-09-13T16:16:14 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Payslip" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2106b6c4-d542-4080-aed0-ea411aaae8be">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="hrisdai"/>
+	<parameter name="EMP_ID" class="java.lang.String"/>
+	<parameter name="HOSPITAL_NAME" class="java.lang.String"/>
+	<parameter name="IMAGE_SRC" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+	  (e.firstname + ' ' + e.lastname) as name
+	  ,(SUBSTRING(CONVERT(VARCHAR,pp.fromDate), 1, 11) + ' To ' + SUBSTRING(CONVERT(VARCHAR,pp.toDate), 1, 11)) as payPeriod	  
+	  ,e.taxstatus
+	  ,pp.payrollType
+	  ,e.empNo
+	  ,epr.employeePayrollRunId
+      ,epr.empId
+      ,epr.taxStatus
+      ,epr.basicPay
+      ,epr.absences
+      ,epr.tardiness
+      ,epr.undertime
+      ,epr.overtime
+      ,epr.leaveWOPay
+      ,epr.nightDiff
+      ,epr.holidayPay
+      ,epr.taxableIncome
+      ,epr.nontaxableIncome
+      ,epr.grossPay
+      ,epr.gsisEmployeeShare
+      ,epr.gsisEmployerShare
+      ,epr.philhealthEmployeeShare
+      ,epr.philhealthEmployerShare
+      ,epr.pagibigEmployeeShare
+      ,epr.pagibigEmployerShare
+      ,epr.loans
+      ,epr.otherDeductions
+      ,epr.withholdingTax
+      ,epr.totalDeductions
+      ,epr.netPay
+      ,epr.payrollCode
+      ,epr.payrollPeriodId
+      ,epr.payrollRunStatus
+      ,epr.createdBy
+      ,epr.createDate
+      ,epr.updatedBy
+      ,epr.updatedDate
+      ,epr.lockedBy
+      ,epr.lockedDate
+      ,epr.otherTaxableIncome
+      
+  FROM employeePayrollRun epr, employee e, payrollPeriod pp
+  WHERE epr.empId = e.empId and epr.payrollPeriodId = pp.payrollPeriodId
+  AND e.empId =  $P{EMP_ID} ]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="payPeriod" class="java.lang.String"/>
+	<field name="taxstatus" class="java.lang.String"/>
+	<field name="payrollType" class="java.lang.String"/>
+	<field name="empNo" class="java.lang.String"/>
+	<field name="employeePayrollRunId" class="java.lang.Integer"/>
+	<field name="empId" class="java.lang.Integer"/>
+	<field name="taxStatus" class="java.lang.String"/>
+	<field name="basicPay" class="java.math.BigDecimal"/>
+	<field name="absences" class="java.math.BigDecimal"/>
+	<field name="tardiness" class="java.math.BigDecimal"/>
+	<field name="undertime" class="java.math.BigDecimal"/>
+	<field name="overtime" class="java.math.BigDecimal"/>
+	<field name="leaveWOPay" class="java.math.BigDecimal"/>
+	<field name="nightDiff" class="java.math.BigDecimal"/>
+	<field name="holidayPay" class="java.math.BigDecimal"/>
+	<field name="taxableIncome" class="java.math.BigDecimal"/>
+	<field name="nontaxableIncome" class="java.math.BigDecimal"/>
+	<field name="grossPay" class="java.math.BigDecimal"/>
+	<field name="gsisEmployeeShare" class="java.math.BigDecimal"/>
+	<field name="gsisEmployerShare" class="java.math.BigDecimal"/>
+	<field name="philhealthEmployeeShare" class="java.math.BigDecimal"/>
+	<field name="philhealthEmployerShare" class="java.math.BigDecimal"/>
+	<field name="pagibigEmployeeShare" class="java.math.BigDecimal"/>
+	<field name="pagibigEmployerShare" class="java.math.BigDecimal"/>
+	<field name="loans" class="java.math.BigDecimal"/>
+	<field name="otherDeductions" class="java.math.BigDecimal"/>
+	<field name="withholdingTax" class="java.math.BigDecimal"/>
+	<field name="totalDeductions" class="java.math.BigDecimal"/>
+	<field name="netPay" class="java.math.BigDecimal"/>
+	<field name="payrollCode" class="java.lang.String"/>
+	<field name="payrollPeriodId" class="java.lang.Integer"/>
+	<field name="payrollRunStatus" class="java.lang.String"/>
+	<field name="createdBy" class="java.lang.String"/>
+	<field name="createDate" class="java.sql.Timestamp"/>
+	<field name="updatedBy" class="java.lang.String"/>
+	<field name="updatedDate" class="java.sql.Timestamp"/>
+	<field name="lockedBy" class="java.lang.String"/>
+	<field name="lockedDate" class="java.sql.Timestamp"/>
+	<field name="otherTaxableIncome" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="476" splitType="Stretch">
+			<textField>
+				<reportElement x="70" y="0" width="131" height="19" uuid="432a6809-958c-4ae3-a694-348da96228a4"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HOSPITAL_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="19" uuid="f2e7400a-9d02-4e9b-89df-1c8bc20969bf"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Company Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="0" width="67" height="19" uuid="aee5c8a4-08f8-4a87-b65e-ef438055755b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Payroll Frequency:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="0" width="50" height="19" uuid="cf091f7e-245c-429d-a21d-cb3ce8f08c6f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Payroll Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="70" height="19" uuid="13032df4-01f7-40f7-889c-33388286cf06"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Employee No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="30" width="67" height="19" uuid="bfce0d9d-1a7a-4682-a0b4-849ae26f47c8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Employee Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="30" width="50" height="19" uuid="6b2c2537-d7b9-43c9-a88a-d1021a242aa2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tax Code:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="180" height="19" uuid="3cde9edd-0d69-4fe7-b1f2-d3bfd27938b8"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Earnings]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="80" width="180" height="19" uuid="5bf1e0aa-2cac-421a-83df-c1bad97fa452"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Deductions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="80" width="170" height="19" uuid="ae044022-8889-4553-aa47-04a2aa1aa677"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Employer's Contribution]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="103" width="80" height="19" uuid="7971c416-535d-496d-8a86-034e343c613f"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Basic]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="122" width="80" height="19" uuid="fd7352fd-0a0e-4c0d-93ae-f8fada51715c"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[NSD Pay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="141" width="80" height="19" uuid="e82de71f-b6f7-48d5-bb75-446c75c236dd"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Overtime]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="80" height="19" uuid="554ef849-fe07-4aeb-9d77-63dc2171f608"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Absences]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="179" width="80" height="19" uuid="18d93d32-1733-4bb4-88d7-be99b0c464e6"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Tardines]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="217" width="80" height="19" uuid="4c90dbc9-cfe9-40b3-bceb-6cb4f8fefe4a"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Holiday]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="103" width="70" height="19" uuid="d3a953b1-c1ee-413d-9c16-4e6f6be7b687"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[GSIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="122" width="70" height="19" uuid="5890c64d-b81b-497e-a388-8f5dd966cf64"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Philhealth]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="141" width="70" height="19" uuid="02716aac-6f7e-461d-b57a-9e3ad47c44cf"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[HDMF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="160" width="70" height="19" uuid="5bdab371-635c-48e0-a2b2-e50a449139de"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Witholding Tax]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="103" width="70" height="19" uuid="3b9b92a0-52fd-49c9-b003-28a780612a0e"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[SSS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="122" width="70" height="19" uuid="e79e560d-d2db-4273-b54e-dd2f41216ec9"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Philhealth]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="141" width="70" height="19" uuid="80a16450-8317-4e8d-bfd7-c0cc8a9359af"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[HDMF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="255" width="80" height="19" uuid="aa5fdd3c-69a5-4759-97ce-51358b7980d5"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Non Taxable Income]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="300" width="70" height="19" uuid="eb4ca055-70f9-4099-a957-64db8c470f5a"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Total Earnings]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="300" width="70" height="19" uuid="6a1fc3e5-b00a-4a0c-9a8c-2cfb29e4ed77"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Total Deductions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="300" width="70" height="19" uuid="1ecb8c62-eadb-46db-a464-d6b7afbdaed5"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Take Home Pay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="370" width="555" height="19" uuid="d9d6edc0-7d26-4831-8475-4e7b6aec9b35"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[I acknowledge to have received the amount stated here within with no further claim for services rendered.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="101" y="419" width="350" height="1" uuid="edd851cf-9672-47b0-8a04-2af7c8f45776">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="271" y="30" width="87" height="19" uuid="90ae19e9-8d56-46f9-8095-7a01633e2912"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="0" width="87" height="19" uuid="9a44786b-1783-4302-b990-2736ca11ab02"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payrollType}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="30" width="87" height="19" uuid="4d3fb98c-57b4-4e83-92a3-1606f7de373c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{taxstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="30" width="110" height="19" uuid="14b899f7-bd6c-4056-9fbf-3d2890912d65"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="0" width="131" height="19" uuid="1ec618aa-8780-40ed-b473-9d8300939562"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payPeriod}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="93" y="103" width="70" height="19" uuid="f86e6c3e-a4c2-42ca-a767-e35523d33ef6"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{basicPay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="93" y="141" width="70" height="19" uuid="58206cdc-d0dd-4f01-b1f6-8b26aa6aa0aa"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{overtime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="93" y="122" width="70" height="19" uuid="439dfc8e-d954-47f2-8434-8cad06a31da8"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nightDiff}]]></textFieldExpression>
+			</textField>
+			<textField pattern="(#,##0.00)">
+				<reportElement x="93" y="160" width="70" height="19" uuid="72aee971-ffd6-4dfb-b261-95210a30863f"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{absences}]]></textFieldExpression>
+			</textField>
+			<textField pattern="(#,##0.00)">
+				<reportElement x="93" y="179" width="70" height="19" uuid="f7b563e9-3bb9-4580-9722-ceb48087578f"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tardiness}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="198" width="80" height="19" uuid="153007af-fca2-4825-a40f-9da43995b6d5"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Undertime]]></text>
+			</staticText>
+			<textField pattern="(#,##0.00)">
+				<reportElement x="93" y="198" width="70" height="19" uuid="fc033f96-6912-4dc4-ac15-489b9b3ddb7a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{undertime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="93" y="217" width="70" height="19" uuid="503418c3-b41c-4c1a-a8f3-fb13880a695c"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{holidayPay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="260" y="103" width="100" height="19" uuid="085ac714-41df-4bd2-af43-bee77ce58266"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gsisEmployeeShare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="260" y="122" width="100" height="19" uuid="d6ff8f2f-b21f-48aa-8785-8d1975eda0fb"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{philhealthEmployeeShare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="260" y="141" width="100" height="19" uuid="4025f547-7ea7-4d76-ad15-28439343d89a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagibigEmployeeShare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="260" y="160" width="100" height="19" uuid="909b173f-ae68-4fe6-9252-f8e4ba7c94ee"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{withholdingTax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="422" width="350" height="19" uuid="151408c3-368b-4d83-95ea-0546019601bb"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="455" y="103" width="100" height="19" uuid="26e47a96-5081-486c-bc99-8b1e6707105d"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gsisEmployerShare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="455" y="122" width="100" height="19" uuid="719cf819-b024-4eee-a1b9-1ad6475dc8f1"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{philhealthEmployerShare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="455" y="141" width="100" height="19" uuid="d36307cd-9cf9-46aa-a4ec-44a62c5e142a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagibigEmployerShare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="93" y="255" width="70" height="19" uuid="0f929ba4-1dd4-446a-9bf2-b00cd0aed69d"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nontaxableIncome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="236" width="80" height="19" uuid="0044a17e-61d2-4c83-81c7-843f5220601c"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[Other Taxable Income]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="93" y="236" width="70" height="19" uuid="372973ef-a4d0-4a82-84cb-ebc18542765a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{otherTaxableIncome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="93" y="300" width="70" height="19" uuid="405c0f55-a2e5-4baf-b035-68e9dbfc935c"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{basicPay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="260" y="300" width="100" height="19" uuid="ab09cf76-de8c-4ef6-9e72-f4a53fe88a77"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalDeductions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="455" y="300" width="100" height="19" uuid="21068854-7ebb-491f-a3ec-e186f48dc5ba"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{netPay}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

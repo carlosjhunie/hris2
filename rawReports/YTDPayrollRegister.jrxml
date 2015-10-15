@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-09-13T23:04:35 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PayrollRegister" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9a737761-da89-4cfc-ae3c-5a597f89bc41">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sql Server data adapter"/>
+	<parameter name="fromLockedDate" class="java.lang.String"/>
+	<parameter name="toLockedDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select distinct e.empNo,
+		sum(epr.basicPay) over (partition by epr.empId) as basicPay,
+		sum(epr.absences) over (partition by epr.empId) as absences,
+		sum(epr.tardiness) over (partition by epr.empId) as tardiness,
+		sum(epr.undertime) over (partition by epr.empId) as undertime,
+		sum(epr.overtime) over (partition by epr.empId) as overtime,
+		sum(epr.leaveWOPay) over (partition by epr.empId) as leaveWOPay,
+		sum(epr.nightDiff) over (partition by epr.empId) as nightDiff,
+		sum(epr.holidayPay) over (partition by epr.empId) as holidayPay,
+		sum(epr.taxableIncome) over (partition by epr.empId) as taxableIncome,
+		sum(epr.nontaxableIncome) over (partition by epr.empId) as nontaxableIncome,
+		sum(epr.grossPay) over (partition by epr.empId) as grossPay,
+		sum(epr.gsisEmployeeShare) over (partition by epr.empId) as gsisEmployeeShare,
+		sum(epr.gsisEmployerShare) over (partition by epr.empId) as gsisEmployerShare,
+		sum(epr.philhealthEmployeeShare) over (partition by epr.empId) as philhealthEmployeeShare,
+		sum(epr.philhealthEmployerShare) over (partition by epr.empId) as philhealthEmployerShare,
+		sum(epr.pagibigEmployeeShare) over (partition by epr.empId) as pagibigEmployeeShare,
+		sum(epr.pagibigEmployerShare) over (partition by epr.empId) as pagibigEmployerShare,
+		sum(epr.loans) over (partition by epr.empId) as loans,
+		sum(epr.otherDeductions) over (partition by epr.empId) as otherDeductions,
+		sum(epr.otherTaxableIncome) over (partition by epr.empId) as otherTaxableIncome,
+		sum(epr.withholdingTax) over (partition by epr.empId) as withholdingTax,
+		sum(epr.totalDeductions) over (partition by epr.empId) as totalDeductions,
+		sum(epr.netPay) over (partition by epr.empId) as netPay,
+		e.lastname + ', ' + e.firstname as formattedName
+from employeePayrollRun epr, employee e
+where e.empId = epr.empId
+and epr.lockedDate >= $P{fromLockedDate}   and epr.lockedDate <=  $P{toLockedDate}]]>
+	</queryString>
+	<field name="empNo" class="java.lang.String"/>
+	<field name="basicPay" class="java.math.BigDecimal"/>
+	<field name="absences" class="java.math.BigDecimal"/>
+	<field name="tardiness" class="java.math.BigDecimal"/>
+	<field name="undertime" class="java.math.BigDecimal"/>
+	<field name="overtime" class="java.math.BigDecimal"/>
+	<field name="leaveWOPay" class="java.math.BigDecimal"/>
+	<field name="nightDiff" class="java.math.BigDecimal"/>
+	<field name="holidayPay" class="java.math.BigDecimal"/>
+	<field name="taxableIncome" class="java.math.BigDecimal"/>
+	<field name="nontaxableIncome" class="java.math.BigDecimal"/>
+	<field name="grossPay" class="java.math.BigDecimal"/>
+	<field name="gsisEmployeeShare" class="java.math.BigDecimal"/>
+	<field name="gsisEmployerShare" class="java.math.BigDecimal"/>
+	<field name="philhealthEmployeeShare" class="java.math.BigDecimal"/>
+	<field name="philhealthEmployerShare" class="java.math.BigDecimal"/>
+	<field name="pagibigEmployeeShare" class="java.math.BigDecimal"/>
+	<field name="pagibigEmployerShare" class="java.math.BigDecimal"/>
+	<field name="loans" class="java.math.BigDecimal"/>
+	<field name="otherDeductions" class="java.math.BigDecimal"/>
+	<field name="otherTaxableIncome" class="java.math.BigDecimal"/>
+	<field name="withholdingTax" class="java.math.BigDecimal"/>
+	<field name="totalDeductions" class="java.math.BigDecimal"/>
+	<field name="netPay" class="java.math.BigDecimal"/>
+	<field name="formattedName" class="java.lang.String"/>
+	<variable name="Variable_1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="180" height="20" uuid="435f275c-125a-4d84-89e7-df2f423faeda"/>
+				<textFieldExpression><![CDATA["YTD PAYROLL REGISTER"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="350" height="20" uuid="767a13cd-528c-42c5-9743-63b8ddb559a8"/>
+				<textFieldExpression><![CDATA["From:              " + $P{fromLockedDate} + "   to   " + $P{toLockedDate} +""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="30" uuid="ff590bfb-ea05-4f43-90da-b38226b1a821"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="700" y="0" width="100" height="30" uuid="7d52819f-12d8-4824-ab57-3a6a9c4a5530"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="800" height="20" uuid="eb04de17-c6ec-47c4-b717-3ce16cdc2baa"/>
+				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="89" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="318f6358-a703-4652-a46f-6b451270a4ea"/>
+				<text><![CDATA[Emp No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="18" uuid="27cba343-6b12-4616-9c2c-ffbfc8d35d20"/>
+				<text><![CDATA[Employee Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="1" width="100" height="18" uuid="368205dc-8e6b-432a-8149-94f13ebc1ada"/>
+				<text><![CDATA[Basic pay]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="60" width="800" height="20" uuid="f84ddafd-5a96-4a18-bd3e-dd0e138d67be"/>
+				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="0" width="70" height="20" uuid="df840715-705d-4432-8231-a7c5b7b98216"/>
+				<text><![CDATA[Overtime]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="20" width="70" height="18" uuid="8f068e24-4800-4995-84f1-bcae9a83f44c"/>
+				<text><![CDATA[Night Diff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="70" height="20" uuid="bd929818-e9ca-4ef5-98cf-732dbf620645"/>
+				<text><![CDATA[Absences]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="20" width="70" height="18" uuid="0548c07e-5ac6-4434-8ab6-61def95eed97"/>
+				<text><![CDATA[Tardiness]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="40" width="80" height="19" uuid="8b626900-cd3f-403e-9490-2fc4620ca574"/>
+				<text><![CDATA[Undertime]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="20" width="80" height="19" uuid="2a2d7aba-5e4e-472d-a1a7-4ecc1033dc4c"/>
+				<text><![CDATA[Holiday Pay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="50" height="21" uuid="580fa6d9-978c-464a-8fdd-16f814d01399"/>
+				<text><![CDATA[LWOP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="80" height="20" uuid="3f2d10cf-d036-41fd-849f-0bc4fd154836"/>
+				<text><![CDATA[HDMF EE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="22" width="80" height="18" uuid="ebe71578-86f1-48a2-a80d-4fc67f43aa5a"/>
+				<text><![CDATA[HDMF ER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="41" width="80" height="19" uuid="6312e055-4c47-4f5c-8a8d-36393a696c39"/>
+				<text><![CDATA[Loans]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="0" width="70" height="20" uuid="52948d13-b77b-46fa-b356-3eddea566f55"/>
+				<text><![CDATA[GSIS EE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="22" width="70" height="18" uuid="fba57add-b82d-4e09-b2d1-f22fcb24dc11"/>
+				<text><![CDATA[GSIS ER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="0" width="70" height="20" uuid="8b3f4535-f4a6-4314-a884-65387953d1d4"/>
+				<text><![CDATA[PHIC EE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="22" width="70" height="18" uuid="e2ba87ff-b1ce-46de-bf3f-0d4b00be0cf6"/>
+				<text><![CDATA[PHIC ER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="40" width="80" height="19" uuid="0d6faa25-5c24-428e-a9fa-4157bc336c7c"/>
+				<text><![CDATA[Other Deduct.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="40" width="80" height="19" uuid="aa139482-45aa-4b99-a40b-5aab6210a654"/>
+				<text><![CDATA[Other Tax. Inc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="0" width="80" height="20" uuid="c595e7de-88fd-44f8-83d6-0d2de1e20cbc"/>
+				<text><![CDATA[Gross Pay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="41" width="80" height="19" uuid="9028f50d-1a57-48c7-8c9b-2ae6de0c32c5"/>
+				<text><![CDATA[Tax Withheld]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="41" width="80" height="19" uuid="f6e38ec9-239d-4df0-9961-e2741e8bed1d"/>
+				<text><![CDATA[NET PAY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="22" width="80" height="18" uuid="34f2560a-20a9-427d-a012-0cf69210ca79"/>
+				<text><![CDATA[Total Deductions]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="86" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="ea0930b8-b1d1-412a-ba84-83322043800e"/>
+				<textFieldExpression><![CDATA[$F{empNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="100" height="20" uuid="07ad2857-2244-4e81-b38a-d0dc4b0e29c3"/>
+				<textFieldExpression><![CDATA[$F{formattedName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="d63a250b-cca2-4476-9323-0b246e356b9f"/>
+				<textFieldExpression><![CDATA[$F{basicPay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="70" height="20" uuid="6770f099-13f1-4d70-a3c3-13eea801f8d5"/>
+				<textFieldExpression><![CDATA[$F{overtime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="20" width="70" height="20" uuid="886a7575-54e8-4189-847b-7e681f17ea17"/>
+				<textFieldExpression><![CDATA[$F{nightDiff}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="1" width="70" height="18" uuid="b816ae0c-405d-42e8-9673-fd1b776e33e5"/>
+				<textFieldExpression><![CDATA["(" + $F{absences} +")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="20" width="70" height="20" uuid="16232717-a8d8-4e50-bbc4-dfe38c3301f9"/>
+				<textFieldExpression><![CDATA["(" + $F{tardiness} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="40" width="70" height="18" uuid="44eeea72-a103-4b77-b4ba-3214c696f8f2"/>
+				<textFieldExpression><![CDATA["(" + $F{undertime} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="20" width="100" height="22" uuid="4eb35cec-7669-4516-9ea4-bf7696a69c07"/>
+				<textFieldExpression><![CDATA[$F{holidayPay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="60" width="800" height="20" uuid="4eeb8851-ae65-47ff-9a7d-7ce2ceed6026"/>
+				<textFieldExpression><![CDATA["-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="50" height="20" uuid="8b08e48b-1954-43e2-b774-02ca81d4dcac"/>
+				<textFieldExpression><![CDATA["(" + $F{leaveWOPay} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="1" width="80" height="20" uuid="35633171-ffd9-4373-853b-b1e431e425a0"/>
+				<textFieldExpression><![CDATA["(" +$F{philhealthEmployeeShare} +")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="21" width="80" height="20" uuid="096125a6-5bad-4153-8b31-854e70017bb8"/>
+				<textFieldExpression><![CDATA[$F{pagibigEmployerShare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="39" width="80" height="20" uuid="a3370cbd-a187-4e64-b202-08f8ae819f89"/>
+				<textFieldExpression><![CDATA["("+$F{loans} +")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="0" width="70" height="21" uuid="fc53a18b-4ed9-495d-baa4-1d1060314722"/>
+				<textFieldExpression><![CDATA["("+ $F{gsisEmployeeShare} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="21" width="70" height="18" uuid="48aae88e-64c1-4494-a421-ce22cc6916d0"/>
+				<textFieldExpression><![CDATA[$F{gsisEmployerShare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="610" y="0" width="70" height="21" uuid="789cbe7c-2838-4990-8af1-2514f8e58570"/>
+				<textFieldExpression><![CDATA["("  + $F{philhealthEmployeeShare} +")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="610" y="22" width="70" height="17" uuid="f6243cf0-7f66-4d37-91ff-a11a4776ab70"/>
+				<textFieldExpression><![CDATA[$F{pagibigEmployerShare}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="41" width="70" height="17" uuid="aad0a48e-5a31-4249-a872-ec1da290b623"/>
+				<textFieldExpression><![CDATA["(" + $F{otherDeductions} +")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="41" width="70" height="17" uuid="f9b7f63f-a8d6-41cb-aa54-7d6728533eb9"/>
+				<textFieldExpression><![CDATA[$F{otherTaxableIncome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="691" y="0" width="79" height="20" uuid="36a53acf-7826-47e6-a011-17871aab262e"/>
+				<textFieldExpression><![CDATA[$F{grossPay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="610" y="40" width="79" height="18" uuid="d4067f7f-9c1a-4deb-aa05-324938168001"/>
+				<textFieldExpression><![CDATA["("+ $F{withholdingTax} +")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="692" y="40" width="78" height="20" uuid="8c7e5b57-7829-45ff-aaf1-fedd7454a02d"/>
+				<textFieldExpression><![CDATA[$F{netPay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="692" y="20" width="78" height="18" uuid="cb4f3723-4a0d-4b9b-8d35-efc4733631b2"/>
+				<textFieldExpression><![CDATA[$F{totalDeductions}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="60" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="134" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="18" uuid="cab9c699-6292-4dbe-8d40-99a6ebeb404f"/>
+				<text><![CDATA[PREPARED BY:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="20" width="100" height="18" uuid="6d1c850b-30cd-4933-94f0-ff85439ae8eb"/>
+				<text><![CDATA[APPROVED BY:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="200" height="22" uuid="9e3cef72-e922-4741-b924-1feaa5377263"/>
+				<textFieldExpression><![CDATA["Generated on " + new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="160" height="30" uuid="cb9fa9e9-12f4-4812-943e-fce39f8017f4"/>
+				<textFieldExpression><![CDATA["________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="40" width="160" height="30" uuid="5239dfee-9738-42b2-8ba0-89427e5771aa"/>
+				<textFieldExpression><![CDATA["________________________"]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

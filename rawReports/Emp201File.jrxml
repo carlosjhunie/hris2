@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-08-15T03:16:14 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Emp201File" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2106b6c4-d542-4080-aed0-ea411aaae8be">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="hrisdai"/>
+	<parameter name="EMP_ID" class="java.lang.String"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="IMAGE_SRC" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT distinct emp.empNo,
+(emp.lastname+', '+emp.firstname) as empName,
+emp.dateOfBirth,
+emp.gender,
+emp.civilStatus,
+(emp.street+' '+ct.cityName+', '+prov.provinceName) as empAddress,
+emp.mobileNo,
+emp.telNo,
+emp.email,
+emp.tin,
+emp.sss,
+emp.gsis,
+emp.hdmf,
+emp.phic,
+emp.empStatus,
+emp.employmentDate,
+emp.employeeTypeId,
+emp.taxStatus,
+dep.departmentName,
+div.divisionName,
+jt.jobTitle,
+epi.*
+FROM employee emp,
+jobTitle jt,
+city ct,
+province prov,
+department dep,
+division div,
+empPayrollInfo epi
+where
+emp.empId = $P{EMP_ID}
+and jt.jobTitleId=emp.jobTitleId
+and ct.cityId=emp.cityId
+and prov.provinceId=emp.provinceId
+and dep.departmentId=emp.departmentId
+and div.divisionId=emp.divisionId
+and epi.empId=emp.empId]]>
+	</queryString>
+	<field name="empNo" class="java.lang.String"/>
+	<field name="empName" class="java.lang.String"/>
+	<field name="dateOfBirth" class="java.sql.Timestamp"/>
+	<field name="gender" class="java.lang.String"/>
+	<field name="civilStatus" class="java.lang.String"/>
+	<field name="empAddress" class="java.lang.String"/>
+	<field name="mobileNo" class="java.lang.String"/>
+	<field name="telNo" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="tin" class="java.lang.String"/>
+	<field name="sss" class="java.lang.String"/>
+	<field name="gsis" class="java.lang.String"/>
+	<field name="hdmf" class="java.lang.String"/>
+	<field name="phic" class="java.lang.String"/>
+	<field name="empStatus" class="java.lang.String"/>
+	<field name="employmentDate" class="java.sql.Timestamp"/>
+	<field name="employeeTypeId" class="java.lang.Integer"/>
+	<field name="taxStatus" class="java.lang.String"/>
+	<field name="departmentName" class="java.lang.String"/>
+	<field name="divisionName" class="java.lang.String"/>
+	<field name="jobTitle" class="java.lang.String"/>
+	<field name="empPayrollInfoId" class="java.lang.Integer"/>
+	<field name="empId" class="java.lang.Integer"/>
+	<field name="monthlyRate" class="java.math.BigDecimal"/>
+	<field name="dailyRate" class="java.math.BigDecimal"/>
+	<field name="hourlyRate" class="java.math.BigDecimal"/>
+	<field name="foodAllowance" class="java.math.BigDecimal"/>
+	<field name="cola" class="java.math.BigDecimal"/>
+	<field name="taxShield" class="java.math.BigDecimal"/>
+	<field name="transAllowance" class="java.math.BigDecimal"/>
+	<field name="payrollType" class="java.lang.String"/>
+	<field name="ban" class="java.lang.String"/>
+	<field name="shiftingScheduleId" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="22" width="555" height="20" uuid="a6f040bf-cb58-492b-a746-c629410b2f63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Employee 201 File]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="52" width="555" height="1" uuid="2827a6f7-eaae-42fc-9a44-2e38eaab839c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</line>
+			<image>
+				<reportElement x="0" y="0" width="50" height="50" uuid="41efb62b-758b-463d-a7c0-16534e4d95e4"/>
+				<imageExpression><![CDATA[$P{IMAGE_SRC}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="2" width="555" height="20" uuid="432a6809-958c-4ae3-a694-348da96228a4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="144" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="0" width="455" height="16" uuid="14c0ce83-4843-4ede-96e9-d6565846dc33"/>
+				<textFieldExpression><![CDATA[$F{empNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="90" height="16" uuid="13564103-1d62-47cc-8e9c-35c072cabe40"/>
+				<text><![CDATA[Emp. No.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="90" height="16" uuid="f3bef56f-d327-409a-989a-6e36d044b679"/>
+				<text><![CDATA[Emp. Name:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="16" width="455" height="16" uuid="cec16fd7-8958-4329-8f06-34f530467184"/>
+				<textFieldExpression><![CDATA[$F{empName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="64" width="555" height="16" uuid="18a764b5-c56e-448d-ace0-df7c6a469ac5"/>
+				<box bottomPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Basic Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="70" height="16" uuid="e0518e3e-e07f-4cd8-b4c7-2998287cdb31"/>
+				<text><![CDATA[Date of Birth:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="96" width="70" height="16" uuid="d93dd820-b550-4b12-b508-4a75fb6ce4b6"/>
+				<text><![CDATA[Gender:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="112" width="70" height="16" uuid="48da4b20-7d2c-41f6-8d83-31531b0ba5cd"/>
+				<text><![CDATA[Marital Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="80" width="79" height="16" uuid="aeb95fb3-b191-4594-b3cf-977fb22f08f0"/>
+				<text><![CDATA[Address:]]></text>
+			</staticText>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="70" y="80" width="100" height="16" uuid="ce5d267c-75fa-4140-864d-e37fc2473283"/>
+				<textFieldExpression><![CDATA[$F{dateOfBirth}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="96" width="100" height="16" uuid="da75ef95-b7a6-4b19-a1f0-bc0ff60cd103"/>
+				<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="112" width="100" height="16" uuid="481756ad-bb16-4a50-9ad6-d950baa94bd7"/>
+				<textFieldExpression><![CDATA[$F{civilStatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="80" width="120" height="32" uuid="566361b8-303f-403e-acad-a68a75697b01"/>
+				<textFieldExpression><![CDATA[$F{empAddress}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="128" width="70" height="16" uuid="f7a84380-c882-49a8-9d9d-14286082728c"/>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="128" width="120" height="16" uuid="e4a1ca9d-3334-4efb-9fd8-269457824408"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="112" width="79" height="16" uuid="49f60dd1-7cb9-4cb2-b8dd-d7fdb7c927c6"/>
+				<text><![CDATA[Mobile No.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="289" y="112" width="120" height="16" uuid="d3264b64-6d63-4abf-b187-6c1a62041f71"/>
+				<textFieldExpression><![CDATA[$F{mobileNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="210" y="128" width="79" height="16" uuid="cb53c5c8-1117-4a48-931b-6456b61c6669"/>
+				<text><![CDATA[Telephone No.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="289" y="128" width="120" height="16" uuid="d0cfeea0-ea18-481e-879e-cc7ff0ef55a6"/>
+				<textFieldExpression><![CDATA[$F{telNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="425" y="80" width="50" height="16" uuid="487da854-e31f-47d9-9e8b-5d2b3c57c043"/>
+				<text><![CDATA[TIN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="96" width="50" height="16" uuid="57373e5f-038f-4fa6-afc2-9a26bf382265"/>
+				<text><![CDATA[SSS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="112" width="50" height="16" uuid="b852ac1a-c2f5-4eb2-9027-5fb3e6663d66"/>
+				<text><![CDATA[HDMF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="128" width="50" height="16" uuid="53647931-a68a-40d2-b64f-bd3cdbce166a"/>
+				<text><![CDATA[PhilHealth:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="475" y="80" width="80" height="16" uuid="687b5c36-0d11-474b-8a3f-165a6b801608"/>
+				<textFieldExpression><![CDATA[$F{tin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="96" width="80" height="16" uuid="3f627a8f-5291-4218-b106-bc5bf2005d4c"/>
+				<textFieldExpression><![CDATA[$F{sss}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="112" width="80" height="16" uuid="6effcfaf-dd4b-42c9-bb24-c155df45d7cd"/>
+				<textFieldExpression><![CDATA[$F{hdmf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="128" width="80" height="16" uuid="cb840643-4b13-4f4d-92bd-7e0840e6f972"/>
+				<textFieldExpression><![CDATA[$F{phic}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="32" width="90" height="16" uuid="49986e5c-e06e-47e3-a478-78fdb1e232cd"/>
+				<text><![CDATA[Employment Status:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="32" width="455" height="16" uuid="83ee7dfd-8584-4f00-aed9-298a05ee2b7e"/>
+				<textFieldExpression><![CDATA[$F{empStatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="129" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="555" height="16" uuid="0a9d706a-e7b9-4b32-a8c7-06d0ba81cc87"/>
+				<box bottomPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Payroll Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="70" height="16" uuid="cc5f6e43-aae1-4589-b3da-bec5e301989a"/>
+				<text><![CDATA[Department:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="70" height="16" uuid="cc7635b5-c98e-446f-8c93-b7b756aa6e64"/>
+				<text><![CDATA[Division:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="49" width="70" height="16" uuid="5bdb8a5c-72a5-4bdb-9f3b-17250691903d"/>
+				<text><![CDATA[Job Title:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="65" width="70" height="16" uuid="5f32ecd9-b181-4656-9ebc-4753c2fbba5e"/>
+				<text><![CDATA[Date Hired:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="81" width="70" height="16" uuid="84968888-f708-4d1a-8bea-1b5aa132e67c"/>
+				<text><![CDATA[Tax Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="70" height="16" uuid="ed2f4a87-1b86-4d5e-81c3-58eb8253281c"/>
+				<text><![CDATA[Monthly Salary:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="113" width="70" height="16" uuid="99a375b3-2d53-404b-9ea0-c518a6a7224b"/>
+				<text><![CDATA[Payroll Type:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="17" width="70" height="16" uuid="1dd9928f-196b-4d98-b0d3-c3b03b2e0485"/>
+				<textFieldExpression><![CDATA[$F{employeeTypeId}.equals( 3 ) ? "NO" : "YES"
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="97" width="100" height="16" uuid="1f94ad92-698c-4147-92a3-4d23a33a89a9"/>
+				<textFieldExpression><![CDATA[$F{monthlyRate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="17" width="160" height="16" uuid="3b6d98d4-1dd8-434c-adac-f2529e2edcc3"/>
+				<text><![CDATA[Deduct GSIS Contribution:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="113" width="100" height="16" uuid="39ab3013-7377-4b1f-8ea3-0127346f5805"/>
+				<textFieldExpression><![CDATA[$F{payrollType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="49" width="160" height="16" uuid="d2024382-bddb-4667-8cc4-355205b6dfa0"/>
+				<text><![CDATA[Deduct HDMF Contribution:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="81" width="100" height="16" uuid="dd61e870-1a18-48b7-8395-0b863c7c7369"/>
+				<textFieldExpression><![CDATA[$F{taxStatus}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="33" width="160" height="16" uuid="66c03e5c-2105-4a85-9a5d-3dee1435f2b3"/>
+				<text><![CDATA[Deduct PhilHealth Contribution:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="65" width="160" height="16" uuid="3e209c67-c747-4c05-a654-5937db8343cf"/>
+				<text><![CDATA[Deduct Withholding Tax:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="33" width="70" height="16" uuid="d5d355ae-550e-4eb4-952d-c09874238a5a"/>
+				<textFieldExpression><![CDATA[$F{employeeTypeId}.equals( 3 ) ? "NO" : "YES"
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="49" width="70" height="16" uuid="30cc6be6-8735-42c3-a8e6-cb98dd3bb0b9"/>
+				<textFieldExpression><![CDATA[$F{employeeTypeId}.equals( 3 ) ? "NO" : "YES"
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="65" width="70" height="16" uuid="4da70053-dc20-4f9c-8112-eda59430717a"/>
+				<textFieldExpression><![CDATA[$F{employeeTypeId}.equals( 3 ) ? "NO" : "YES"
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="49" width="100" height="16" uuid="7cc54b4c-038b-4fe9-8ee4-cf8f157a5a20"/>
+				<textFieldExpression><![CDATA[$F{jobTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="17" width="100" height="16" uuid="e7129586-9274-4e9a-9e63-3d0ce58ed5da"/>
+				<textFieldExpression><![CDATA[$F{departmentName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="33" width="100" height="16" uuid="631ece27-37f7-4e27-b1fa-77f71a9aa111"/>
+				<textFieldExpression><![CDATA[$F{divisionName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="70" y="65" width="100" height="16" uuid="8e5615db-04f5-49f2-9d39-50e53ba72864"/>
+				<textFieldExpression><![CDATA[$F{employmentDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="52" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

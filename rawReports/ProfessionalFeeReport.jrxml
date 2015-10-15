@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-08-10T00:12:16 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProfessionalFeeReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f53042b6-e317-4494-bb72-581aa732b0cb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="hrisdai"/>
+	<parameter name="HOSPITAL_NAME" class="java.lang.String"/>
+	<parameter name="IMAGE_SRC" class="java.lang.String"/>
+	<parameter name="dateFrom" class="java.lang.String"/>
+	<parameter name="dateTo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (e.lastname + ', ' + e.firstname) as name,
+CONVERT(varchar(20),e.empNo,100) as empNo,
+crp.grossAmount,crp.withHoldingTax,crp.finalTax,crp.netAmountDue 
+from ProfessionalFee crp, employee e 
+where crp.empId=e.empId
+and crp.officialReceiptDate between $P{dateFrom} and $P{dateTo}]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="empNo" class="java.lang.String"/>
+	<field name="grossAmount" class="java.math.BigDecimal"/>
+	<field name="withHoldingTax" class="java.math.BigDecimal"/>
+	<field name="finalTax" class="java.math.BigDecimal"/>
+	<field name="netAmountDue" class="java.math.BigDecimal"/>
+	<sortField name="name"/>
+	<sortField name="empNo"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="5" width="555" height="20" uuid="7e9e2110-09a6-40c7-977f-0fb8d76781ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{HOSPITAL_NAME}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="50" height="50" uuid="44dd55d3-e084-49a2-adce-31d19da3c742"/>
+				<imageExpression><![CDATA[$P{IMAGE_SRC}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="25" width="555" height="20" uuid="d7e77a6a-3924-4136-8296-b98801301709"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[PROFESSIONAL FEE SUMMARY REPORT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="38" height="14" uuid="434a28aa-3e40-4569-8f2d-ca765ae0988b"/>
+				<text><![CDATA[FROM: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="0" width="80" height="14" uuid="13bf3bc1-bd83-46e5-8ea9-9272ea4a5176"/>
+				<textFieldExpression><![CDATA[$P{dateFrom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="14" width="38" height="14" uuid="8535edb0-cf0c-4186-884f-d556c3ca9ecc"/>
+				<text><![CDATA[TO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="14" width="80" height="14" uuid="9e77e654-5053-46c1-8fee-52256e065961"/>
+				<textFieldExpression><![CDATA[$P{dateTo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="420" y="0" width="50" height="14" uuid="408268c1-67bb-4cc1-9005-053387679527"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[Printed on: ]]></text>
+			</staticText>
+			<textField pattern="M/d/yyyy h:mm a">
+				<reportElement x="470" y="0" width="84" height="14" uuid="5f7cffa9-9ccb-4dda-8ad6-e0cecb2261c8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="-10" y="0" width="565" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="6b495894-055b-424c-83e5-543314240434"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="38" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="362117b5-9c3e-4520-a2ea-5a4ae7c75d47"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Emp. No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="140" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="98e0f146-4450-4c57-bcd1-d31e7b157500"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="6950335d-0f88-4213-b235-81a95132109f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Gross Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="e37e14aa-a7bf-4b8b-a49a-64dfea93efb5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Withholding Tax]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="74" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="689b1e4f-4a34-480e-805f-9fd6ff06973a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Final Tax]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="a7a90ba6-00ba-46cc-8234-f8e1710b2a3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Net Amount Due]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="40" height="20" uuid="dd560a72-aabf-41af-a193-ab893a224c98"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{empNo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="0" width="140" height="20" uuid="fb459a4d-c622-4a96-840b-f9f452356c05"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="0" width="100" height="20" uuid="c31ac60f-9dc2-4d07-8a70-b71166bcd43e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{grossAmount}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="0" width="100" height="20" uuid="4d5f1215-ac94-479e-a574-81a08ae96e7c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{withHoldingTax}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="380" y="0" width="74" height="20" uuid="277b113d-c21b-4cda-9462-94d3ab583536"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{finalTax}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="455" y="0" width="100" height="20" uuid="f9a77621-9093-489d-bbc8-7ab66c7dfd18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{netAmountDue}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="481" y="2" width="74" height="14" uuid="b1aa255a-1b4d-47b9-b375-db1fadd463a6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page: "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="2" width="481" height="14" uuid="e4406e8c-a5bb-49f2-8462-ddf9a308c2e7"/>
+				<textFieldExpression><![CDATA[$P{HOSPITAL_NAME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" uuid="15af8df2-3951-4695-b9e9-d41c8f9d4a35">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

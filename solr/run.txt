@@ -1,0 +1,15 @@
+ download http://mirrors.gigenet.com/apache/lucene/solr/5.2.1
+ 
+ copy hris_employee to solrdirector/server/solr
+ 
+ in dashboard -> Core admin then add core
+
+start
+ solr start -p 8983
+ 
+ STOP
+ solr stop -all
+ 
+ index:
+ http://localhost:8983/solr/hris_employee/dataimport?command=full-import
+ 

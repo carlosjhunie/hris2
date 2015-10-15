@@ -1,0 +1,31 @@
+<dataConfig>
+ <dataSource type="JdbcDataSource" 
+              driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+              url="jdbc:sqlserver://localhost:1433;databaseName=hrisdai"   
+              user="dai" 
+              password="dai"/>
+			  
+    <document>
+        <entity name="employee" 
+				query="SELECT empid, empno, firstname, lastname, departmentId, 
+(select departmentName from department where employee.departmentId = department.departmentId) departmentName,
+(select divisionName from division where division.divisionId = employee.divisionId) divisionName
+from employee"
+				deltaImportQuery="SELECT empid, empno, firstname, lastname, departmentId, 
+(select departmentName from department where employee.departmentId = department.departmentId) departmentName,
+(select divisionName from division where division.divisionId = employee.divisionId) divisionName
+from employee WHERE empid='${dih.delta.id}'"
+                deltaQuery="select empid from employee where last_modified > '${dataimporter.last_index_time}'">
+			
+			<field column="empid" name="empid" />
+			<field column="empno" name="empno" />
+			<field column="departmentName" name="departmentName" />
+			<field column="divisionName" name="divisionName" />
+			
+			<field column="firstname" name="firstname" />
+			<field column="lastname" name="lastname" />
+
+        </entity>
+    </document>
+</dataConfig>
+

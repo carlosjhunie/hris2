@@ -1,0 +1,33 @@
+.jtable-input-field-container {
+    margin-bottom: 5px;
+    display: block;
+    float: none;
+}
+#jtable-create-form {
+    display: block;
+    width: 100%;
+    -moz-column-gap:40px;
+    /* Firefox */
+    -webkit-column-gap:40px;
+    /* Safari and Chrome */
+    column-gap:40px;
+    -moz-column-count:2;
+    /* Firefox */
+    -webkit-column-count:2;
+    /* Safari and Chrome */
+    column-count:2;
+}
+#jtable-edit-form {
+    display: block;
+    width: 100%;
+    -moz-column-gap:40px;
+    /* Firefox */
+    -webkit-column-gap:40px;
+    /* Safari and Chrome */
+    column-gap:40px;
+    -moz-column-count:2;
+    /* Firefox */
+    -webkit-column-count:2;
+    /* Safari and Chrome */
+    column-count:2;
+}
